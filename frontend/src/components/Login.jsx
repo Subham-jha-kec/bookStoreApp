@@ -1,10 +1,46 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form";
-
+import axios from 'axios';
+import toast from 'react-hot-toast';
 function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const onSubmit = async (data) => {
+    const userInfo={
+      // fullName:data.fullName,
+      email:data.email,                        //only email and password hum login pe bhej rahe h 
+      password:data.password,
+      
+    };
+    await axios.post("http://localhost:4001/user/login",userInfo)  //jaha jaha api callkrte h waha pe async await ka use krte h
+    .then((res)=>{
+      console.log(res.data)
+      if(res.data){
+        // alert("Login Successfully")
+        toast.success('Login Successfully');
+        document.getElementById("my_modal_3").close()
+
+        setTimeout(()=>{
+          window.location.reload();
+          localStorage.setItem("yahapekuchbhiname",JSON.stringify(res.data.user)); //json.stringify exact data ko local storage me show kardega
+        },1000);
+        
+       
+
+      }
+    }).catch((err)=>{
+      if (err.response){
+        console.log(err);
+        // alert();
+        toast.error("invalid userName or password");
+        setTimeout(()=>{},2000);
+
+      }
+      
+      
+    });
+  }
+    // console.log(data);
   return (
     <div>
         <dialog id="my_modal_3" className="modal">
@@ -14,8 +50,10 @@ function Login() {
       {/* <Link  to="/" className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</Link> */}
       {/* <Link  to="/" className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</Link> */}
       <Link
-      onClick={() => navigate("/")}  // ✅ `/` par navigate karega
+      to="/"
+      // onClick={() => navigate("/")}  // ✅ `/` par navigate karega
       className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+      onClick={()=> document.getElementById("my_modal_3").close()}
     >
       ✕
     </Link>
@@ -42,9 +80,9 @@ function Login() {
 </span>
 <br />
 <input type="Password" placeholder='Enter ypur Password' className=' w-80 px-3 py-1 border rounded-md outline-none'
-{...register("Password", { required: true })} />
+{...register("password", { required: true })} />
 <br />
-{errors.Password && <span className='text-sm text-red-500'>This field is required</span>}                 {/* errors will return when field validation fails  */}
+{errors.password && <span className='text-sm text-red-500'>This field is required</span>}                 {/* errors will return when field validation fails  */}
 
 
     </div>

@@ -5,9 +5,33 @@ import Slider from "react-slick";
 import Cards from "./Cards";
 
 
-import list from "../list.json";
+// import list from "../list.json";
+import axios from "axios"
+import React, { useEffect, useState } from "react";
+
+
 function Freebook() {
-  const filterData = list.filter((data) => data.category === "free");
+  const [book,setBook]=useState([])
+  
+  useEffect(() =>{
+  const getBook = async()=>{
+    try {
+    //  const res = await axios.get("http://localhost:4001/book");
+    const res = await axios.get("http://localhost:4001/book");
+  
+    
+    const data = (res.data.filter((data) => data.category === "free"));
+    console.log(data);
+    setBook(data);
+    } catch (error) {
+      console.log(error);
+      
+    }
+  };
+  getBook();
+  
+  },[]);
+  // const filterData = list.filter((data) => data.category === "free");
   // console.log(filterData);
 
   var settings = {
@@ -56,8 +80,8 @@ return (
     
     <div>
     <Slider {...settings}>
-          {filterData.length > 0 ? (
-            filterData.map((item) =>
+          {book.length > 0 ? (
+            book.map((item) =>
                <Cards item={item} key={item.id} />)
           ) : (
             <p>No Courses Available</p>
