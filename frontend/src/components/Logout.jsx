@@ -18,11 +18,11 @@ function Logout() {
         setTimeout(()=>{
           window.location.reload();
         //   localStorage.setItem("yahapekuchbhiname",JSON.stringify(res.data.user)); //json.stringify exact data ko local storage me show kardega
-        },3000);
+        },4000);
             // window.location.reload();
         } catch (error) {
             toast.error("Error:"+ error)
-        setTimeout(()=> {},2000);
+        setTimeout(()=> {},3000);
         }
     };
   return (
