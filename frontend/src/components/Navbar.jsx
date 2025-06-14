@@ -408,21 +408,22 @@ function Navbar() {
               </div>
             )}
           </div>
-
-          {/* 🌙 Light/Dark Toggle */}
           <div>
-            <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
-              {theme === "light" ? (
-                <svg className="h-7 w-7 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41...Z" />
-                </svg>
-              ) : (
-                <svg className="h-7 w-7 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M21.64,13a1,1,0,0,0-1.05-.14..." />
-                </svg>
-              )}
-            </button>
-          </div>
+  <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+    {theme === "light" ? (
+      // Light mode icon (Sun)
+      <svg className="h-6 w-9" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m8.66-13.66l-.7.7M4.34 19.66l-.7.7M21 12h1M3 12H2m1.34-7.66l.7.7M19.66 19.66l.7.7M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+    ) : (
+      // Dark mode icon (Moon)
+      <svg className="h-6 w-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+      </svg>
+    )}
+  </button>
+</div>
+
 
           {/* 🔐 Auth Buttons */}
           {authUser ? (

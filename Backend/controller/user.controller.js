@@ -60,14 +60,14 @@ const LOCK_TIME = 1 * 60 * 1000;  // Lock time in milliseconds (5 minutes)
 
 export const signup = async (req, res) => {
   try {
-    const { fullName, email, password } = req.body;
+    const { fullName, email, password } = req.body;      //this is the data that comes when we enter in the form
     const user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({ message: "User already exists" });
     }
 
     const hashPassword = await bcryptjs.hash(password, 10);
-    const createdUser = new User({
+    const createdUser = new User({       //for creating new user and will store in db
       fullName: fullName,
       email: email,
       password: hashPassword,

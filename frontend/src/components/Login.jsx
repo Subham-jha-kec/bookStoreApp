@@ -133,7 +133,7 @@ function Login() {
   const [timer, setTimer] = useState(60);
 
   // Check lockout status from localStorage on first load
-  useEffect(() => {
+  useEffect(() => {                                                   //useEffect component k render hone pe har baar chlega e.g whatsapp ka message count har bar new msg aane pe update hota h 
     const storedLockTime = localStorage.getItem("lockoutStart");
     if (storedLockTime) {
       const elapsed = Math.floor((Date.now() - parseInt(storedLockTime)) / 1000);

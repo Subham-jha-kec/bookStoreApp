@@ -100,6 +100,8 @@ const userInfo={
   password:data.password,
   
 }
+
+//store the userInfo in db
 await axios.post("http://localhost:4001/user/signup",userInfo)  //jaha jaha api callkrte h waha pe async await ka use krte h
 .then((res)=>{
   console.log(res.data)
@@ -108,7 +110,7 @@ await axios.post("http://localhost:4001/user/signup",userInfo)  //jaha jaha api 
     toast.success('SignUp Successfully');
     navigate(from,{replace:true});
   }
-  localStorage.setItem("yahapekuchbhiname",JSON.stringify(res.data.user)); //json.stringify exact data ko local storage me show kardega
+  localStorage.setItem("yahapekuchbhiname",JSON.stringify(res.data.user)); //(key,value)  localStorage me bhejne k liye json.stringify ka use karte h wo exact data ko local storage me nhejdega and localStorage se data lene k liye parse ka use karte h
 }).catch((err)=>{
   if (err.response){
     console.log(err);

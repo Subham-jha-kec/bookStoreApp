@@ -8,7 +8,7 @@ import userRoute from "./route/user.route.js"
 const app = express();
 app.use(cors());
 
-app.use(express.json());
+app.use(express.json());        //jo data hum body se bhej rahe h usko json me parse karega
 
 
 
@@ -27,8 +27,8 @@ try{
     }
 
     //defining routes
-app.use("/book", bookRoute)
-app.use("/user",userRoute)
+app.use("/book", bookRoute)         //it means if url  start from (/book) then send it to bookRoute  or / if start from /user then send to user route
+app.use("/user",userRoute)       
 
 // connect to mongodb
 // mongodb://localhost:27017/
